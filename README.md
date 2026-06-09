@@ -37,10 +37,11 @@ Re-Size BAR shifts the system from traditional 256MB VRAM transfer blocks to an 
 To safely initialize Re-Size BAR within the motherboard firmware, the underlying operating system and hardware layout must comply with strict architectural specifications:
 
 * Operating System Storage Layout: The Windows boot drive must utilize the GPT (GUID Partition Table) partitioning scheme. Legacy MBR (Master Boot Record) configurations are fundamentally incompatible.
-* Graphics Card Firmware: The GPU VBIOS must support Re-Size BAR features. This is native on NVIDIA GeForce RTX 3000/4000 series and AMD Radeon RX 5000/6000/7000 series or newer.
-* Motherboard Boot Environment: Compatibility Support Module (CSM) must be fully disabled to allow the platform to run in a pure UEFI state. 
+* Graphics Card Firmware: The GPU VBIOS must support Re-Size BAR features. This is native on NVIDIA GeForce RTX 3000, 4000, and 5000 series, as well as AMD Radeon RX 5000, 6000, 7000, and 9000 series or newer.
+* Motherboard Boot Environment: Compatibility Support Module (CSM) must be fully disabled to allow the platform to run in a pure UEFI state.
 
-*Warning Note*: Disabling CSM on an operating system drive partition older than GPT will render the system unbootable until CSM is re-enabled. Ensure partition verification via Windows Disk Management before proceeding.
+> [!WARNING]  
+> Disabling CSM on an operating system drive partition formatted in older MBR layouts will render the entire system unbootable until CSM is manually re-enabled in the UEFI. Always verify your system partition style via Windows Disk Management or Command Line utilities prior to modifying this hardware state.
 
 ---
 
