@@ -29,6 +29,21 @@ AMD Ryzen architectures rely on an internal interconnect highway known as the In
 
 ---
 
+## 🖥️ Re-Size BAR Architecture and Requirements
+
+Re-Size BAR shifts the system from traditional 256MB VRAM transfer blocks to an unhindered data pipeline. This adjustment allows the CPU to dynamically map the entire graphics card frame buffer simultaneously, drastically removing peripheral component interconnect express (PCIe) queue overhead.
+
+### System Configuration Pre-requisites
+To safely initialize Re-Size BAR within the motherboard firmware, the underlying operating system and hardware layout must comply with strict architectural specifications:
+
+* Operating System Storage Layout: The Windows boot drive must utilize the GPT (GUID Partition Table) partitioning scheme. Legacy MBR (Master Boot Record) configurations are fundamentally incompatible.
+* Graphics Card Firmware: The GPU VBIOS must support Re-Size BAR features. This is native on NVIDIA GeForce RTX 3000/4000 series and AMD Radeon RX 5000/6000/7000 series or newer.
+* Motherboard Boot Environment: Compatibility Support Module (CSM) must be fully disabled to allow the platform to run in a pure UEFI state. 
+
+*Warning Note*: Disabling CSM on an operating system drive partition older than GPT will render the system unbootable until CSM is re-enabled. Ensure partition verification via Windows Disk Management before proceeding.
+
+---
+
 ## 🎛️ Precision Boost Overdrive (PBO) and Curve Optimizer Matrix
 
 Precision Boost Overdrive (PBO) allows the CPU to dynamically scale clock frequencies based on current, power, and thermal limits. By utilizing Curve Optimizer, we execute a dynamic undervolt across the voltage-frequency curve. Lower operating voltages reduce thermal output, expanding the headroom required for sustained boost clocks.
