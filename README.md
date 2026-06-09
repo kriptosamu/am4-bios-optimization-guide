@@ -10,9 +10,9 @@ The primary objective of these adjustments is to minimize communication overhead
 
 While software optimization cannot bridge the architectural gap between Zen 3 and newer generation platforms, executing these fine-tunes yields substantial real-world performance scaling:
 
-* 🎮 Average Gaming Frame Rate: +10% to +15% average throughput increase.
-* 📉 1% Low FPS (Frametime Stability): +20% to +25% improvement. This is the most critical metric because eliminating communication queues actively eradicates micro-stuttering.
-* ⚙️ Production Workloads (Rendering/Encoding): +5% to +10% execution speedup, driven by extended CPU boost durations made possible by superior thermal margins.
+* Average Gaming Frame Rate: +10% to +15% average throughput increase.
+* 1% Low FPS (Frametime Stability): +20% to +25% improvement. This is the most critical metric because eliminating communication queues actively eradicates micro-stuttering.
+* Production Workloads (Rendering/Encoding): +5% to +10% execution speedup, driven by extended CPU boost durations made possible by superior thermal margins.
 
 ---
 
@@ -20,12 +20,12 @@ While software optimization cannot bridge the architectural gap between Zen 3 an
 
 This methodology completely avoids manual memory overclocking. The focus is strictly locked on forcing the memory modules to run stable at their advertised box speeds (3200MHz, 3600MHz, or 4000MHz) while eliminating hidden latency penalties introduced by standard motherboard auto behaviors.
 
-### 🔄 Infinity Fabric (FCLK) Synchronization Rules
+### Infinity Fabric (FCLK) Synchronization Rules
 AMD Ryzen architectures rely on an internal interconnect highway known as the Infinity Fabric (FCLK). To bypass severe memory controller latency penalties, the FCLK must maintain a strict 1:1 synchronous ratio with the true RAM clock, which corresponds to half of the DDR effective speed.
 
-* 📍 3200MHz RAM Configuration: Enable XMP or DOCP and manually lock FCLK to 1600MHz.
-* 📍 3600MHz RAM Configuration: Enable XMP or DOCP and manually lock FCLK to 1800MHz. This is the AM4 architectural sweet spot.
-* 📍 4000MHz RAM Configuration: High-risk threshold. The vast majority of Ryzen memory controllers cannot sustain a 2000MHz FCLK clock stably. If the motherboard automatically switches to an asynchronous 2:1 ratio to maintain boot stability, a 4000MHz memory profile will yield worse real-world gaming performance than a synchronized 3600MHz profile. If instability occurs, downclock the RAM to 3600MHz and lock FCLK to 1800MHz.
+* 3200MHz RAM Configuration: Enable XMP or DOCP and manually lock FCLK to 1600MHz.
+* 3600MHz RAM Configuration: Enable XMP or DOCP and manually lock FCLK to 1800MHz. This is the AM4 architectural sweet spot.
+* 4000MHz RAM Configuration: High-risk threshold. The vast majority of Ryzen memory controllers cannot sustain a 2000MHz FCLK clock stably. If the motherboard automatically switches to an asynchronous 2:1 ratio to maintain boot stability, a 4000MHz memory profile will yield worse real-world gaming performance than a synchronized 3600MHz profile. If instability occurs, downclock the RAM to 3600MHz and lock FCLK to 1800MHz.
 
 ---
 
@@ -35,19 +35,19 @@ Precision Boost Overdrive (PBO) allows the CPU to dynamically scale clock freque
 
 Navigate to the Advanced PBO menu, set Curve Optimizer to Sign: Negative, and apply these verified baseline targets:
 
-### 🔹 Ryzen 5000 Series (Zen 3 Architecture)
+### Ryzen 5000 Series (Zen 3 Architecture)
 * Target Models: 5600X, 5700X, 5800X, 5900X
 * PBO Limits: Set to Motherboard or Advanced
 * Curve Optimizer: Negative
 * Baseline Target: Start at -20 on all cores. If validated stable under load, incrementally stress-test towards -25 or -30. High-TDP models like the 5800X or 5900X run inherently warm, so a negative offset drastically softens sudden thermal spikes.
 
-### 🔹 Ryzen 5000X3D Series (Zen 3 V-Cache)
+### Ryzen 5000X3D Series (Zen 3 V-Cache)
 * Target Models: 5700X3D, 5800X3D
 * PBO Limits: Set to Disabled or Stock. The 3D V-Cache silicon layer is highly voltage-sensitive, so you must not elevate default power limits.
 * Curve Optimizer: Negative
 * Baseline Target: Lock -20 to -30 on all cores. These processors scale exceptionally well with voltage reduction, maximizing automatic frequency retention within strict thermal boundaries.
 
-### 🔹 Ryzen 3000 Series (Zen 2 Architecture)
+### Ryzen 3000 Series (Zen 2 Architecture)
 * Target Models: 3600, 3700X, 3800X, 3900X
 * PBO Limits: Set to Auto or Enabled
 * Curve Optimizer: This feature is not natively integrated into the microcode of early Zen 2 BIOS layouts.
@@ -73,9 +73,9 @@ Enter the Motherboard UEFI utility by pressing DEL or F2 during cold boot and ve
 
 Once parameters are saved, running thorough validation tests is critical to ensure that the voltage offsets do not compromise system telemetry or data integrity:
 
-1. ⏱️ Cinebench R23 (30-Minute Loop): Validates Curve Optimizer structural stability under sustained all-core execution states.
-2. 🧮 Prime95 (Blend Preset): Stress-tests the CPU memory controller, transient voltage drops, and FCLK alignment consistency.
-3. 💾 TestMem5 (TM5): Execute a dedicated run to verify that disabling RAM Power Down Mode has not compromised memory bank signaling or caused silent data corruption.
+1. Cinebench R23 (30-Minute Loop): Validates Curve Optimizer structural stability under sustained all-core execution states.
+2. Prime95 (Blend Preset): Stress-tests the CPU memory controller, transient voltage drops, and FCLK alignment consistency.
+3. TestMem5 (TM5): Execute a dedicated run to verify that disabling RAM Power Down Mode has not compromised memory bank signaling or caused silent data corruption.
 
 ---
 
